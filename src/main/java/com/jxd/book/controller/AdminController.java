@@ -21,7 +21,7 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
-//    @GetMapping
+
     @RequestMapping("/book")
     public String verifyLogin(Admin admin) {
         Admin adminRe = adminService.verifyLogin(admin);
