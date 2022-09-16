@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jxd.book.dao.IBookDao">
+    <!--List<BookWithTypeVO> selectBookWithType(String text, int page, int limit);-->
+    <select id="selectBookWithType" resultType="BookWithTypeVO">
+        select bno, bname, author, press, pubdate, bnums, price,b.tno,type
+        from book b left join btype t on b.tno = t.tno
+        <where>
+            <if test="bname != null and bname != ''">
+                bname like '%' #{bname} '%'
+            </if>
+            <if test="tno != -1">
+                and b.tno = #{tno}
+            </if>
+        </where>
+        limit #{page},#{limit};
+    </select>
+
+
+    <!--Book selectBookObjByBno(int bno);-->
+    <select id="selectBookObjByBno" resultType="Book">
+        select bno,bname,author,press,pubdate,bnums,price,tno
+        from book where bno=#{bno}
+    </select>
+
+
+    <!--boolean insertOneBook(com.jxd.book.model.Book book);-->
+
+
+
+
+    <select id="selectBookNums" resultType="Integer">
+         select count(*) nums from book
+    </select>
+
+    <insert id="insertOneBook">
+        insert into book (bname,author,press,pubdate,bnums,price,tno)
+        values(#{bname},#{author},#{press},#{pubdate},#{bnums},#{price},#{tno})
+    </insert>
+
+    <!--boolean updateOneBook(Book book);-->
+    <update id="updateOneBook">
+        update book set bname=#{bname},author=#{author},press=#{press},
+        pubdate=#{pubdate},bnums=#{bnums},price=#{price},tno=#{tno}
+        where bno=#{bno} ;
+    </update>
+
+    <!--boolean deleteBatchBooks(int[] bnos);-->
+    <delete id="deleteBatchBooks">
+        delete from book
+        where bno in
+        <foreach collection="bnos" item="bno" open="(" close=")" separator=",">
+            #{bno}
+        </foreach>
+    </delete>
+
+
+</mapper>
