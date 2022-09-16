@@ -59,41 +59,4 @@ public class BookController {
         return "" + isSuccess;
     }
 
-
-  /*
-     * @return int
-     *//*
-    int getBookNums();
-
-    *//**
-     *通过书号查找图书对象
-     *
-     * @param bno bno
-     * @return {@link Book}
-     *//*
-    Book getBookObjByBno(int bno);
-
-    *//**
-     * 插入一本书
-     *
-     * @param book 书
-     * @return boolean
-     *//*
-    boolean addOneBook(com.jxd.book.model.Book book);
-
-    *//**
-     * 删除书
-     *
-     * @param bnos bno
-     * @return boolean
-     *//*
-    boolean deleteBatchBook(int[] bnos);
-
-    *//**
-     * 编辑图书信息
-     *
-     * @param book 书
-     * @return boolean
-     *//*
-    boolean editOneBook(Book book);*/
 }
